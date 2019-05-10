@@ -8,17 +8,11 @@
 #define ZERO (double)(0.0)
 #define THREE (double)(3.0)
 
-// 問題(2)
-// 1. 演算の回数を減らすことによる最適化
-// 1/3を配列aに掛けておけば(1/N)回の演算
-//
-// 2. 演算の種類の変更による高速化
-// ビットシフト不可能
-// 割り算 => 掛け算
-// #defineでなく変数に結果格納
+// 問題(4)
+// a[][]が0のときに無駄なループを避ける
 
 // 結果
-// time =   85.22857
+// time =   66.64976
 // 184.458017
 
 // for 秒数計測
@@ -51,17 +45,20 @@ int main(){
   t1 = getrusage_sec();
 
   static double one_third_part = 1.0/3.0;
+  static double tmp;
 
   // c[i][j]の計算 *DENOM_THREE
   for (i = 0; i < N; i++){
     for (j = 0; j < N; j++){
       c[i][j] = ZERO;
-      a[i][j] = a[i][j]*one_third_part;
     }
 
     for (k = 0; k < N; k++){
-      for (j = 0; j < N; j++){
-      	c[i][j] = c[i][j] + a[i][k]*b[k][j];
+      if (a[i][k] != ZERO) {
+        tmp = a[i][k]*one_third_part;
+        for (j = 0; j < N; j++){
+        	c[i][j] = c[i][j] + tmp*b[k][j];
+        }
       }
     }
   }

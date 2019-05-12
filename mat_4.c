@@ -47,15 +47,15 @@ int main(){
   static double one_third_part = 1.0/3.0;
   static double tmp;
 
-  // c[i][j]の計算 *DENOM_THREE
   for (i = 0; i < N; i++){
     for (j = 0; j < N; j++){
       c[i][j] = ZERO;
     }
 
     for (k = 0; k < N; k++){
-      if (a[i][k] != ZERO) {
-        tmp = a[i][k]*one_third_part;
+      tmp = a[i][k];
+      if (tmp != ZERO) {
+        tmp = one_third_part*tmp;
         for (j = 0; j < N; j++){
         	c[i][j] = c[i][j] + tmp*b[k][j];
         }

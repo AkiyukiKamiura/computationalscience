@@ -15,7 +15,7 @@
 // 添字の変化は最も右側のものから行うようにする
 
 // 結果
-// time =   93.70803
+// time =   78.60498
 // 184.458017
 
 // for 秒数計測
@@ -47,6 +47,8 @@ int main(){
 
   t1 = getrusage_sec();
 
+  static double tmp;
+
   // c[i][j]の計算
   for (i = 0; i < N; i++){
     for (j = 0; j < N; j++){
@@ -54,8 +56,9 @@ int main(){
     }
 
     for (k = 0; k < N; k++){
+      tmp = a[i][k];
       for (j = 0; j < N; j++){
-      	c[i][j] = c[i][j] + a[i][k]*b[k][j]/THREE;
+      	c[i][j] = c[i][j] + tmp*b[k][j]/THREE;
       }
     }
   }

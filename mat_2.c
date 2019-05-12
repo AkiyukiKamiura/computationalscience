@@ -6,6 +6,7 @@
 
 #define N 2048
 #define ZERO (double)(0.0)
+#define ONE (double)(1.0)
 #define THREE (double)(3.0)
 
 // 問題(2)
@@ -50,18 +51,18 @@ int main(){
 
   t1 = getrusage_sec();
 
-  static double one_third_part = 1.0/3.0;
+  static double tmp;
+  static double one_third_part = ONE/THREE;
 
-  // c[i][j]の計算 *DENOM_THREE
   for (i = 0; i < N; i++){
     for (j = 0; j < N; j++){
       c[i][j] = ZERO;
-      a[i][j] = a[i][j]*one_third_part;
     }
 
     for (k = 0; k < N; k++){
+      tmp = a[i][k]*one_third_part;
       for (j = 0; j < N; j++){
-      	c[i][j] = c[i][j] + a[i][k]*b[k][j];
+      	c[i][j] = c[i][j] + tmp*b[k][j];
       }
     }
   }
